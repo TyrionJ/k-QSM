@@ -2,11 +2,12 @@ import os
 import torch
 from torch import optim
 from torch.fft import fftshift, fftn
+import time
 
-from kernel import create_kernel
-from ..config import last_model, best_model, check_folder
-from ..network.net_loss import NetLoss
-from ..network.net_model import LFDQSM
+from utils.kernel import create_kernel
+from config import last_model, best_model, check_folder
+from network.net_loss import NetLoss
+from network.net_model import LFDQSM
 
 
 def phase2in(phase, ori, thd):
@@ -30,22 +31,24 @@ def phase2in(phase, ori, thd):
     return inputs
 
 
-def save_model(epoch, model, opt, best_valid=None):
+def save_model(epoch, model, opt, thr, best_valid=None):
     state = {
         'epoch': epoch,
         'model_state': model.state_dict(),
         'optimizer_state': opt.state_dict(),
         'best_valid': best_valid
     }
-    torch.save(state, last_model)
+    torch.save(state, last_model(thr))
+
     if best_valid is not None:
-        torch.save(state, best_model)
+        torch.save(state, best_model(thr))
 
     if (epoch+1) % 10 == 0:
-        torch.save(state, f'{check_folder}/m_{epoch}.pkt')
+        torch.save(state, f'{check_folder}/{thr}/m_{epoch}.pkt')
 
 
-def load_model(device, model_file=last_model):
+def load_model(device, model_file):
+    print('Loading model ...')
     epoch, best_valid = 0, 999
     loss_func = NetLoss()
 
@@ -63,5 +66,8 @@ def load_model(device, model_file=last_model):
 
         print('  ' + model_file + ' loaded.')
         print('  epoch: ' + str(epoch))
+    else:
+        time.sleep(0.1)
+        print('  Use initial model')
 
     return epoch, model, loss_func, opt, best_valid

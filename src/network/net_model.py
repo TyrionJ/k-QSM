@@ -1,8 +1,4 @@
-import torch
 import torch.nn as nn
-import os
-
-os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 
 ks = (3, 3, 3)
 sd = (1, 1, 1)
@@ -64,14 +60,3 @@ class WideResBlock(nn.Module):
         out = self.relu2(out + X_in)
 
         return out
-
-
-if __name__ == '__main__':
-    net = LFDQSM()
-    total_params = 0
-    for name, parameters in net.named_parameters():
-        s = torch.tensor(parameters.size())
-        total_params += torch.prod(s)
-        print(name, ':', parameters.size())
-
-    print('Total parameters:', total_params.item())

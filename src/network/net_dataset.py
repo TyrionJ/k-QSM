@@ -4,11 +4,11 @@ import h5py
 import numpy as np
 from torch.utils.data import Dataset
 
-from v8_9_1.config import train_file, valid_file
+from config import train_file, valid_file
 
 
 class QSMDataset(Dataset, ABC):
-    def __init__(self, mode: str = 'train'):
+    def __init__(self, thr, mode: str = 'train'):
         super(QSMDataset, self).__init__()
 
         self.mode = mode
@@ -17,7 +17,7 @@ class QSMDataset(Dataset, ABC):
         self.r_label, self.i_label = None, None
 
         self.dataset_len = 0
-        self.data_file = train_file if mode == 'train' else valid_file
+        self.data_file = train_file(thr) if mode == 'train' else valid_file(thr)
 
         with h5py.File(self.data_file, 'r') as f:
             self.dataset_len = len(f['kernel'])

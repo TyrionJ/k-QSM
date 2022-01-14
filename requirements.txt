@@ -1,0 +1,8 @@
+dipy==1.4.1
+h5py==3.6.0
+matplotlib==3.5.0
+nibabel==3.2.1
+numpy==1.21.4
+scipy==1.7.3
+torch==1.8.0+cu111
+tqdm==4.62.3

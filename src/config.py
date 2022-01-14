@@ -1,40 +1,38 @@
-VERSION = 'v8_9_1'
-DATA_VERSION = 'v8_9_1'
+from typing import Callable
 
 PATCH_SIZE = 64
 
-VERSION_FOLDER = f'../data/{VERSION}'
+DATA_FOLDER = f'../data'
 
-predict_folder = f'{VERSION_FOLDER}/predict'
-test_img_folder = f'{VERSION_FOLDER}/images'
+predict_folder = f'{DATA_FOLDER}/predict'
+test_img_folder = f'{DATA_FOLDER}/images'
 
-data_folder = f'../data/{DATA_VERSION}'
-train_file = f'{data_folder}/train.hdf5'
-valid_file = f'{data_folder}/valid.hdf5'
-stat_file = f'{data_folder}/stat.mat'
+train_file: Callable[[float], str] = lambda thr: f'{DATA_FOLDER}/train-thr{thr}.hdf5'
+valid_file: Callable[[float], str] = lambda thr: f'{DATA_FOLDER}/valid-thr{thr}.hdf5'
 
-test_folder = f'{data_folder}/test'
-test_prefix = f'{test_folder}/test_'
+check_folder = f'../checkpoint'
+record_file: Callable[[float], str] = lambda thr: f'{check_folder}/{thr}/record.txt'
+best_model: Callable[[float], str] = lambda thr: f'{check_folder}/{thr}/best.pkt'
+last_model: Callable[[float], str] = lambda thr: f'{check_folder}/{thr}/last.pkt'
 
-check_folder = f'../checkpoint/{VERSION}'
-record_file = f'{check_folder}/record.txt'
-best_model = f'{check_folder}/best.pkt'
-last_model = f'{check_folder}/last.pkt'
-spec_model = f'{check_folder}/last.pkt'
-
-TDK_THRESHOLD = 0.1
+THR_01 = 0.1
+THR_02 = 0.2
 
 
-import os
-if not os.path.exists(VERSION_FOLDER):
-    os.mkdir(VERSION_FOLDER)
-if not os.path.exists(data_folder):
-    os.mkdir(data_folder)
-if not os.path.exists(check_folder):
-    os.mkdir(check_folder)
-if not os.path.exists(predict_folder):
-    os.mkdir(predict_folder)
-if not os.path.exists(test_img_folder):
-    os.mkdir(test_img_folder)
-if not os.path.exists(test_folder):
-    os.mkdir(test_folder)
+def make_fdr():
+    import os
+    if not os.path.exists(DATA_FOLDER):
+        os.mkdir(DATA_FOLDER)
+    if not os.path.exists(check_folder):
+        os.mkdir(check_folder)
+    if not os.path.exists(predict_folder):
+        os.mkdir(predict_folder)
+    if not os.path.exists(test_img_folder):
+        os.mkdir(test_img_folder)
+    if not os.path.exists(f'{check_folder}/{THR_01}'):
+        os.mkdir(f'{check_folder}/{THR_01}')
+    if not os.path.exists(f'{check_folder}/{THR_01}'):
+        os.mkdir(f'{check_folder}/{THR_02}')
+
+
+make_fdr()

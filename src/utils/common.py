@@ -1,17 +1,6 @@
-import argparse
 import os
 import torch
 from torch.utils.data import DataLoader
-
-
-def proj_param():
-    parser = argparse.ArgumentParser(description='k-QSM: MRI DIPOLE INVERSION')
-    parser.add_argument('-d', '--device', default='cpu', type=str)
-    parser.add_argument('-b', '--batch_size', default=1, type=int)
-    parser.add_argument('-e', '--epoch', default=500, type=int)
-    parser.add_argument('-v', '--version', default='', type=str)
-
-    return parser.parse_args()
 
 
 def set_env(device):

@@ -5,7 +5,7 @@ Source codes and trained networks described in the paper: Learn Less, Infer More
 k-QSM was proposed by Junjie He and Dr. Lihui Wang. 
 It reconstructs COSMOS-like QSM and preserves magnetic susceptibility anisotropy in white matter. 
 
-##Environmental Requirements:
+###Environmental Requirements:
 
 Python 3.7
 
@@ -13,7 +13,7 @@ torch 1.8.0
 
 
 ###Files descriptions:  
-***k-QSM*** contains the following folders:
+**k-QSM:** contains the following folders:
 
 **data:** It provides samples of Kirby data.
 

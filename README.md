@@ -14,8 +14,6 @@ torch 1.8.0
 ###Files descriptions:  
 ***k-QSM*** contains the following folders:
 
-**checkpoint:** It contains pre-trained k-QSM models of truncated value 0.1 and 0.2.
-
 **data:** It provides samples of Kirby data.
 
 **src:** It includes source codes.

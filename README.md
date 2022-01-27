@@ -19,16 +19,20 @@ torch 1.8.0
 
 **src:** It includes source codes.
 
+
 ###Usage
 
 ####Install requirements
+
 pip install -r requirements.txt
+
 
 ####Test
 
 You can run infer_script.py directly to reconstruct QSM on the provided data. The results will be saved in the sub-folder of **data**.    
 
 For testing your own data, you can refer to the script and re-write it.
+
 
 ####Train
 

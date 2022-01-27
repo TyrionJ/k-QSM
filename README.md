@@ -22,7 +22,6 @@ torch 1.8.0
 ###Usage
 
 ####Install requirements
-
 pip install -r requirements.txt
 
 ####Test
